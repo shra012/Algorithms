@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Algorithms, Part I.iml" filepath="$PROJECT_DIR$/Algorithms, Part I.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Algorithms.iml" filepath="$PROJECT_DIR$/.idea/Algorithms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms-3rd-Edition/Algorithms-3rd-Edition.iml" filepath="$PROJECT_DIR$/Algorithms-3rd-Edition/Algorithms-3rd-Edition.iml" />
     </modules>
   </component>
 </project>

@@ -1,4 +1,6 @@
 # Intellij
+out
+!.idea/fileTemplates
 .idea
 # MacOS
 .DS_Store
