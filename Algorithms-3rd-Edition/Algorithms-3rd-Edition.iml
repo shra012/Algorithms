@@ -9,6 +9,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/.lift" />
+      <excludeFolder url="file://$MODULE_DIR$/out" />
       <excludePattern pattern="*.iml" />
       <excludePattern pattern="*.class" />
     </content>
