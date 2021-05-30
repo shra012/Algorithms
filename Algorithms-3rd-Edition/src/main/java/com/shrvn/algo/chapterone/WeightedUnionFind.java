@@ -20,8 +20,12 @@ public class WeightedUnionFind {
         }
         while (!in.isEmpty()) {
             int i, j, p = in.readInt(), q = in.readInt();
-            for (i = p; i != id[i]; i = id[i]) ;
-            for (j = q; j != id[j]; j = id[j]) ;
+            for (i = p; i != id[i]; i = id[i]){
+                id[i] = id[id[i]];
+            }
+            for (j = q; j != id[j]; j = id[j]) {
+                id[j ] = id[id[j]];
+            }
             if (i == j) continue;
             if (sz[i] < sz[j]) {
                 id[i] = j;
