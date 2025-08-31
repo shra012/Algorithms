@@ -1,11 +1,7 @@
 package com.shrvn.algo.chapter1.initial;
 
-import edu.princeton.cs.algs4.ST;
 import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
-
-import java.util.Arrays;
 
 import static edu.princeton.cs.algs4.StdOut.println;
 //
@@ -19,17 +15,17 @@ public class BinarySearch {
         }
         println(uniform(1,10));
 
-        double a [] = {0.2,0.3,0.5,0.4};
+        double[] a = {0.2,0.3,0.5,0.4};
         println(discrete(a));
     }
 
     public static double uniform(double a, double b){
-         return a + StdRandom.uniform() * (b-a);
+         return a + StdRandom.uniformDouble() * (b-a);
     }
 
     public static int discrete(double[] a) {
         // Entries in a[] must sum to 1.
-        double r = StdRandom.uniform();
+        double r = StdRandom.uniformDouble();
         double sum = 0.0;
         for (int i = 0; i < a.length; i++) {
             sum = sum + a[i];

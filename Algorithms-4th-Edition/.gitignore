@@ -5,3 +5,5 @@
 # Gradle
 .gradle
 build
+.java-version
+src/main/resources/algs4-data/
