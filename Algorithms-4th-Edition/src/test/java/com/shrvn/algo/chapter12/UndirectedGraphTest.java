@@ -1,7 +1,10 @@
 package com.shrvn.algo.chapter12;
 
+import edu.princeton.cs.algs4.In;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -10,35 +13,31 @@ class UndirectedGraphTest {
 
     @BeforeEach
     void setUp() {
-        sampleGraph = new UndirectedGraph(3);
-        sampleGraph.addEdge(0, 1);
-        sampleGraph.addEdge(1, 2);
+        sampleGraph = new UndirectedGraph(new In("algs4-data/tinyG.txt"));
     }
 
     @Test
     void testGraphCreation() {
-        assertEquals(3, sampleGraph.V());
-        assertEquals(2, sampleGraph.E());
+        assertEquals(13, sampleGraph.V());
+        assertEquals(13, sampleGraph.E());
     }
 
     @Test
     void testAddEdgeAndAdjacency() {
-        assertEquals(2, sampleGraph.E());
-        assertTrue(sampleGraph.adj(1).iterator().hasNext());
-        assertTrue(((Iterable<Integer>)sampleGraph.adj(1)).iterator().hasNext());
+        assertTrue(sampleGraph.adj(0).iterator().hasNext());
+        assertTrue(((Iterable<Integer>)sampleGraph.adj(0)).iterator().hasNext());
+        assertTrue(sampleGraph.degree(0) > 0);
     }
 
     @Test
     void testDegree() {
-        assertEquals(2, sampleGraph.degree(1));
-        assertEquals(1, sampleGraph.degree(0));
-        assertEquals(1, sampleGraph.degree(2));
+        assertEquals(4, sampleGraph.degree(0));
+        assertEquals(1, sampleGraph.degree(7));
     }
 
     @Test
     void testMaxDegree() {
-        // For sampleGraph, vertex 1 has degree 2
-        assertEquals(2, sampleGraph.maxDegree());
+        assertEquals(4, sampleGraph.maxDegree());
     }
 
     @Test
@@ -50,11 +49,9 @@ class UndirectedGraphTest {
 
     @Test
     void testToString() {
-        UndirectedGraph g = new UndirectedGraph(2);
-        g.addEdge(0, 1);
-        String s = g.toString();
-        assertTrue(s.contains("0: 1"));
-        assertTrue(s.contains("1: 0"));
+        String s = sampleGraph.toString();
+        assertTrue(s.contains("0: 5 1 2 6"));
+        assertTrue(s.contains("6: 4 0"));
     }
 
     @Test
