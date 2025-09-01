@@ -6,9 +6,16 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 /**
- * This class represents an undirected graph using an adjacency list representation.
+ * An undirected graph, implemented using an adjacency list.
+ * <p>
+ * Supports basic graph operations such as adding edges, retrieving adjacent vertices,
+ * and computing degree-related properties. Vertices are integer-indexed from 0 to V-1.
+ * </p>
+ * <p>
+ * This implementation is suitable for sparse graphs and is not thread-safe.
+ * </p>
  */
-public class UndirectedGraph {
+public class UndirectedGraph implements com.shrvn.algo.chapter12.Graph {
     private final List<List<Integer>> adj;
     private final int V;
     private int E;
@@ -63,6 +70,7 @@ public class UndirectedGraph {
      *
      * @return number of vertices
      */
+    @Override
     public int V() {
         return V;
     }
@@ -72,6 +80,7 @@ public class UndirectedGraph {
      *
      * @return number of edges
      */
+    @Override
     public int E() {
         return E;
     }
@@ -83,6 +92,7 @@ public class UndirectedGraph {
      * @param w the other vertex
      * @throws IllegalArgumentException if vertex is invalid
      */
+    @Override
     public void addEdge(int v, int w) {
         validateVertex(v);
         validateVertex(w);
@@ -98,16 +108,63 @@ public class UndirectedGraph {
      * @return iterable of adjacent vertices
      * @throws IllegalArgumentException if vertex is invalid
      */
+    @Override
     public Iterable<Integer> adj(int v) {
         validateVertex(v);
         return Collections.unmodifiableList(adj.get(v));
     }
 
     /**
-     * Validates that v is a valid vertex.
+     * Returns the average degree of the graph (using integer division).
      *
-     * @param v the vertex
-     * @throws IllegalArgumentException if vertex is invalid
+     * @return the average degree
+     */
+    @Override
+    public int averageDegree() {
+        return 2 * E / V;
+    }
+
+    /**
+     * Returns the number of self-loops in the graph.
+     *
+     * @return the number of self-loops
+     */
+    @Override
+    public int numberOfSelfLoops() {
+        int matches = 0;
+        for (int v = 0; v < V; v++) {
+            for (int w : adj.get(v)) {
+                if (w == v) {
+                    matches++;
+                }
+            }
+        }
+        return matches / 2;
+    }
+
+    /**
+     * Returns a string representation of the graph.
+     * Each line contains a vertex and its adjacent vertices.
+     *
+     * @return a string representation of the graph
+     */
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder(V + " vertices, " + E + " edges\n");
+        for (int v = 0; v < V; v++) {
+            s.append(v).append(": ");
+            for (int w : this.adj(v))
+                s.append(w).append(" ");
+            s.append("\n");
+        }
+        return s.toString();
+    }
+
+    /**
+     * Throws an exception if the vertex is not between 0 and V-1.
+     *
+     * @param v the vertex to validate
+     * @throws IllegalArgumentException if the vertex is invalid
      */
     private void validateVertex(int v) {
         if (v < 0 || v >= V) {
@@ -122,6 +179,7 @@ public class UndirectedGraph {
      * @return degree of v
      * @throws IllegalArgumentException if vertex is invalid
      */
+    @Override
     public int degree(int v) {
         validateVertex(v);
         return adj.get(v).size();
@@ -132,38 +190,11 @@ public class UndirectedGraph {
      *
      * @return maximum degree
      */
+    @Override
     public int maxDegree() {
         return V == 0 ? 0 : IntStream.range(0, V)
                 .map(v -> adj.get(v).size())
                 .max()
                 .orElse(0);
-    }
-
-    public int averageDegree() {
-        return 2 * E / V;
-    }
-
-    public int numberOfSelfLoops() {
-        int matches = 0;
-        for (int v = 0; v < V; v++) {
-            for (int w : adj.get(v)) {
-                if (w == v) {
-                    matches++;
-                }
-            }
-        }
-        return matches / 2;
-    }
-
-
-    public String toString() {
-        StringBuilder s = new StringBuilder(V + " vertices, " + E + " edges\n");
-        for (int v = 0; v < V; v++) {
-            s.append(v).append(": ");
-            for (int w : this.adj(v))
-                s.append(w).append(" ");
-            s.append("\n");
-        }
-        return s.toString();
     }
 }
